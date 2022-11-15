@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, SafeAreaView, StatusBar, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import ActionButton from 'react-native-action-button';
+import FloatingWriteButton from "./component/FloatingWriteButton";
 
 import Reminder from './component/Reminder';
 
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <SafeAreaView backgroundColor="#F2F2F2" style={{ flex: 1 }} >
       <StatusBar backgroundColor="#61dafb" />
-
+      <FloatingWriteButton/>
 
 
       <ScrollView stickyHeaderIndices={[1]}>
