@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View, Text } from "react-native";
 import  Icon  from "react-native-vector-icons/MaterialIcons";
 
 function TransparentCircleButton({ name, color, hasMarginRight, onPress }) {
@@ -16,7 +16,8 @@ function TransparentCircleButton({ name, color, hasMarginRight, onPress }) {
                 ]}
                 onPress={onPress}
                 android_ripple={{ color: '#ededed' }} >
-                <Icon name={name} size={24} color={color} />
+                {/* <Icon name={name} size={24} color={color} /> */}
+                <Text style={{fontWeight:"bold", fontSize: 17, color: color}}>{name}</Text>
             </Pressable>
         </View>
     );

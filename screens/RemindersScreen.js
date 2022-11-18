@@ -7,12 +7,17 @@ import Reminder from "../components/Reminder";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from "@react-navigation/native";
 
+import SearchScreen from "./SearchScreen";
+
 
 
 function RemindersScreen() {
     const navigation = useNavigation();
     const onPress = () => {
         navigation.navigate('Menu');
+    };
+    const onPress2 = () => {
+        navigation.navigate('Search');
     };
 
 
@@ -48,8 +53,18 @@ function RemindersScreen() {
                             <Text style={{ fontSize: 20, fontWeight: "bold" }}>전체</Text>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
-                            <Icon name="search" size={30} style={{ marginRight: 25 }} />
-                            <Icon name="ellipsis-v" size={30} style={{ marginRight: 15 }} />
+                            <Pressable
+                                style={({ pressed }) => [
+                                    styles.button,
+                                    Platform.OS === 'ios' && {
+                                        opacity: pressed ? 0.6 : 1,
+                                    },
+                                ]}
+                                android_ripple={{ color: 'white' }}
+                                onPress={onPress2}>
+                                <Icon name="search" size={30} style={{ marginRight: 25 }} />
+                            </Pressable>
+                            <Icon name="ellipsis-v" size={30} style={{ marginRight: 25 }} />
                         </View>
                     </View>
                 </View>
@@ -90,9 +105,9 @@ function RemindersScreen() {
     );
 }
 
-function Box({ children }) {
-    return <View style={styles.box}>{children('Hello World')}</View>;
-}
+// function Box({ children }) {
+//     return <View style={styles.box}>{children('Hello World')}</View>;
+// }
 
 const styles = StyleSheet.create({
 
