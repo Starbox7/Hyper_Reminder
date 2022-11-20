@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainTab from "./MainTab";
 import WriteScreen from "./WriteScreen";
 import MenuScreen from "./MenuScreen";
-import SearchScreen from "./SearchScreen";
+import SearchScreen from "./GithubScreen";
 
 const Stack = createNativeStackNavigator();
 

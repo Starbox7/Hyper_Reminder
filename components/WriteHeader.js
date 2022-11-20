@@ -38,7 +38,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        marginBottom: 10,
+        paddingBottom:15,
+        paddingTop: 15,
+        backgroundColor: "#F4F3EF",
     },
     iconButtonWrapper: {
         width: 32,

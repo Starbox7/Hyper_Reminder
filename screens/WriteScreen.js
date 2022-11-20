@@ -20,7 +20,7 @@ function WriteScreen(){
 const styles = StyleSheet.create({
     block: {
         flex: 1,
-        backgroundColor: 'white',  //F4F3EF
+        backgroundColor: 'white',  //#F4F3EF
     },
 });
 

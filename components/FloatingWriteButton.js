@@ -20,7 +20,7 @@ function FloatingWriteButton(){
             ]}
             android_ripple={{color: 'white'}}
             onPress={onPress}>
-            <Icon name="add" size={24} style={styles.icon} />
+            <Icon name="add" size={34} style={styles.icon} />
             </Pressable>
         </View>
     );
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
         width: 56,
         height: 56,
         borderRadius: 28,
-        backgroundColor: '#009688',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     icon:{
-        color:'white',
+        color:'black',
     },
 });
 

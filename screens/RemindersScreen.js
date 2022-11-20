@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, Text, TextInput, SafeAreaView, ScrollView, Pressable } from "react-native";
+import { StyleSheet, View, Text, TextInput, SafeAreaView, ScrollView, Pressable, Button } from "react-native";
 import LogContext from "../contexts/LogContext";
 import FloatingWriteButton from "../components/FloatingWriteButton";
 
 import Reminder from "../components/Reminder";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from "@react-navigation/native";
+import EvilIconsIcon from 'react-native-vector-icons/EvilIcons'
+import IoniconsIcon from 'react-native-vector-icons/Ionicons'
 
-import SearchScreen from "./SearchScreen";
+import SearchScreen from "./GithubScreen";
 
 
 
@@ -24,7 +26,7 @@ function RemindersScreen() {
     const { text, setText } = useContext(LogContext);
     return (
 
-        <View style={styles.block}>
+        <View style={{backgroundColor: "#F4F3EF"}}>
             <FloatingWriteButton />
 
             <ScrollView stickyHeaderIndices={[1]}>
@@ -32,9 +34,39 @@ function RemindersScreen() {
                     justifyContent: "center",
                     alignItems: "center",
                     height: 200,
-                    marginTop: 15,
+                    marginTop: 50,
                 }}>
-                    <Text style={{ fontSize: 35, fontWeight: "bold" }}>전체</Text>
+                    <Text style={{ fontSize: 35, fontWeight: "bold" }}>지난 리마인더 n개</Text>
+                    <View style={{flexDirection: "row",}}>
+                        <Pressable>
+                            <Text style={{
+                                backgroundColor: "#ddd", 
+                                borderRadius: 15, 
+                                paddingTop: 3, 
+                                paddingBottom: 3,
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                                fontWeight: "bold", 
+                                color: "#545454",
+                                marginLeft:5,
+                                marginRight:5,
+                                }}>나중에</Text>
+                        </Pressable>
+                        <Pressable>
+                            <Text style={{
+                                backgroundColor: "#ddd", 
+                                borderRadius: 15, 
+                                paddingTop: 3, 
+                                paddingBottom: 3,
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                                fontWeight: "bold", 
+                                color: "#545454",
+                                marginLeft:5,
+                                marginRight:5,
+                                }}>보기</Text>
+                        </Pressable>
+                    </View>
                 </View>
                 <View>
                     <View style={styles.MenuBar}>
@@ -48,7 +80,7 @@ function RemindersScreen() {
                                 ]}
                                 android_ripple={{ color: 'white' }}
                                 onPress={onPress}>
-                                <Icon name="bars" size={30} style={{ marginRight: 15, marginLeft: 15 }} />
+                                <IoniconsIcon name="menu-outline" size={30} style={{ marginRight: 10, marginLeft: 15 }} />
                             </Pressable>
                             <Text style={{ fontSize: 20, fontWeight: "bold" }}>전체</Text>
                         </View>
@@ -62,9 +94,9 @@ function RemindersScreen() {
                                 ]}
                                 android_ripple={{ color: 'white' }}
                                 onPress={onPress2}>
-                                <Icon name="search" size={30} style={{ marginRight: 25 }} />
+                                <EvilIconsIcon name="search" size={30} style={{ marginRight: 15 }} />
                             </Pressable>
-                            <Icon name="ellipsis-v" size={30} style={{ marginRight: 25 }} />
+                            <IoniconsIcon name="ellipsis-vertical" size={20} style={{ marginTop: 2, marginRight: 25 }} />
                         </View>
                     </View>
                 </View>
@@ -112,11 +144,13 @@ function RemindersScreen() {
 const styles = StyleSheet.create({
 
     MenuBar: {
-        height: 70,
+        height: 80,
         justifyContent: "space-between",
         alignItems: 'center',
         flexDirection: 'row',
-        backgroundColor: "#F2F2F2"
+        backgroundColor: "#F2F2F2",
+        borderRadius: 15,
+        paddingTop:15,
     },
     ReminderCategories: {
         marginLeft: 25,

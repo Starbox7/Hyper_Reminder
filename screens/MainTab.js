@@ -2,9 +2,11 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RemindersScreen from "./RemindersScreen";
 import CalendarScreen from "./CalendarScreen";
-import SearchScreen from "./SearchScreen";
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import GithubScreen from "./GithubScreen";
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 // import Icon from 'react-native-vector-icons/FontAwesome';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
+
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +14,7 @@ function MainTab() {
     return (
         <Tab.Navigator
             screenOptions={{
+                headerShown: false,
                 showLabel: false,
                 activeTintColor: '#009688',
             }}>
@@ -20,7 +23,7 @@ function MainTab() {
                 component={RemindersScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="check" size={size} color={color} />
+                        <MaterialIcon name="check" size={size} color={color} />
                     ),
                 }}
             />
@@ -29,19 +32,19 @@ function MainTab() {
                 component={CalendarScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="event" size={size} color={color} />
+                        <MaterialIcon name="event" size={size} color={color} />
                     ),
                 }}
             />
-            {/* <Tab.Screen
-                name="Search"
-                component={SearchScreen}
+            <Tab.Screen
+                name="Github"
+                component={GithubScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="search" size={size} color={color} />
+                        <AntDesignIcon name="github" size={size} color={color} />
                     ),
                 }}
-            /> */}
+            />
         </Tab.Navigator>
     )
 }
