@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
-import { StyleSheet, View, Text, TextInput, SafeAreaView, ScrollView, Pressable, Button } from "react-native";
-import LogContext from "../contexts/LogContext";
-import FloatingWriteButton from "../components/FloatingWriteButton";
+import React, { useState } from "react";
+
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 
 import Reminder from "../components/Reminder";
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from "@react-navigation/native";
-import EvilIconsIcon from 'react-native-vector-icons/EvilIcons'
+import ReminderList from "../components/ReminderList";
 import IoniconsIcon from 'react-native-vector-icons/Ionicons'
+import EvilIconsIcon from 'react-native-vector-icons/EvilIcons'
+import FloatingWriteButton from "../components/FloatingWriteButton";
 
-import SearchScreen from "./GithubScreen";
 
 
+function ReminderScreen() {
 
-function RemindersScreen() {
     const navigation = useNavigation();
     const onPress = () => {
         navigation.navigate('Menu');
@@ -21,14 +20,17 @@ function RemindersScreen() {
     const onPress2 = () => {
         navigation.navigate('Search');
     };
+    const [Reminders, setReminders] = useState([]);
+    const addReminder = title => {
+        setReminders([...Todos,
+          {id: uuid(), titleValue: title, checkde: false}, // check true면 완료
+        ]);
+      };
 
-
-    const { text, setText } = useContext(LogContext);
     return (
 
         <View style={{backgroundColor: "#F4F3EF"}}>
             <FloatingWriteButton />
-
             <ScrollView stickyHeaderIndices={[1]}>
                 <View style={{
                     justifyContent: "center",
@@ -36,7 +38,7 @@ function RemindersScreen() {
                     height: 200,
                     marginTop: 50,
                 }}>
-                    <Text style={{ fontSize: 35, fontWeight: "bold" }}>지난 리마인더 n개</Text>
+                    <Text style={{ fontSize: 35, fontWeight: "bold" }}>지난 리마인더 2개</Text>
                     <View style={{flexDirection: "row",}}>
                         <Pressable>
                             <Text style={{
@@ -100,25 +102,9 @@ function RemindersScreen() {
                         </View>
                     </View>
                 </View>
-                <View style={{
-                    height: 120,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#FFFFFF',
-                    marginTop: 10,
-                    marginBottom: 10,
-                    borderRadius: 10
-                }}>
-                    <Text style={{ backgroundColor: '#FFC300' }}>[중앙 메뉴바 구현 계획]</Text>
-                    <Text>메뉴 분류 : 전체, 지연, 예정, 중요, 완료됨, 휴지통</Text>
-                    <Text>메뉴 기능 : 설정, 리마인더 카테고리, 소셜연동TODO, Tasks, 카테고리 관리 버튼</Text>
-                    <Text>검색 : 분류 : 체크리스트, 이미지, 링크 (음성명령지원)</Text>
-                    <Text>3점메뉴 : 편집 및 정렬 (수행일정순 / 마감기한순)</Text>
-                </View>
 
                 <Text style={styles.ReminderCategories}>미뤄둔 일</Text>
-                <Reminder />
-                <Reminder />
+                <ReminderList />
 
                 <Text style={styles.ReminderCategories}>오늘</Text>
                 <Reminder />
@@ -137,9 +123,7 @@ function RemindersScreen() {
     );
 }
 
-// function Box({ children }) {
-//     return <View style={styles.box}>{children('Hello World')}</View>;
-// }
+
 
 const styles = StyleSheet.create({
 
@@ -153,11 +137,11 @@ const styles = StyleSheet.create({
         paddingTop:15,
     },
     ReminderCategories: {
-        marginLeft: 25,
+        marginLeft: 20,
         color: "#6E6E6E",
         fontWeight: "bold",
         height: 20,
     },
 });
 
-export default RemindersScreen;
+export default ReminderScreen;

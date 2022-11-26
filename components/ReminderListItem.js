@@ -1,18 +1,21 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FeatherIcon from 'react-native-vector-icons/Feather'
 
-export default function Reminder() {
+const { width, height } = Dimensions.get("window");
 
-    return(
+const ReminderListItem = ({titleValue, id, checked}) => {
+    return (
         <View style={styles.Reminder}>
             <View style={{width:40, alignItems: "flex-end", marginTop:18,}}>
                 <MaterialCommunityIconsIcon name="checkbox-blank-outline" size={21} style={{color: "red"}}/>
             </View>
             <View style={styles.reminderMain}>
                 <View style={{marginBottom:7, marginTop: 7,}}>
-                    <Text style={{fontWeight: "bold", fontSize: 17,}}>[토이 프로젝트] 모바일 개발 방법론</Text>
+                    <Text style={{fontWeight: "bold", fontSize: 17,}}>{titleValue}</Text>
                 </View>
                 <View style={{flexDirection: "row", marginLeft: 7, marginRight: 13}}>
                     <MaterialCommunityIconsIcon name="checkbox-blank-outline" size={13} style={{marginRight:10, marginTop:4}}/>
@@ -51,7 +54,7 @@ export default function Reminder() {
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     Reminder: {
@@ -69,3 +72,48 @@ const styles = StyleSheet.create({
   
   });
   
+
+// const styles = StyleSheet.create({
+//     container: {
+//         width: width - 70,
+//         flex: 1,
+//         borderBottomColor: '#bbb',
+//         borderBottomWidth: StyleSheet.hairlineWidth,
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//         justifyContent: 'space-between',
+//     },
+//     text: {
+//         flex: 5,
+//         fontWeight: '500',
+//         fontSize: 18,
+//         marginVertical: 20,
+//         width: 100,
+//     },
+//     circle: {
+//         width: 30,
+//         height: 30,
+//         borderRadius: 15,
+//         borderColor: '#3867d6',
+//         borderWidth: 2,
+//         marginRight: 20,
+//         marginLeft: 20,
+//     },
+//     completeCircle: {
+//         marginRight: 20,
+//         marginLeft: 20,
+//     },
+//     strikeText: {
+//         color: '#bbb',
+//         textDecorationLine: 'line-through',
+//     },
+//     unstrikeText: {
+//         color: '#29323c',
+//     },
+//     buttonContainer: {
+//         marginVertical: 10,
+//         marginHorizontal: 10,
+//     },
+// });
+
+export default ReminderListItem;

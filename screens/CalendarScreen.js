@@ -1,22 +1,20 @@
-import React, { useContext } from "react";
-import { StyleSheet, View, Text } from "react-native";
-// import LogContext from "../contexts/LogContext";
+import React from "react";
+
+import { StyleSheet, View } from "react-native";
+
+
 
 function CalendarScreen(){
-    // const {text} = useContext(LogContext);
+
     return(
-    <View style={styles.block}>
-        {/* <Text style={styles.text}>text: {text}</Text> */}
-    </View>
+        <View style={styles.block}></View>
     );
 }
 
+
+
 const styles = StyleSheet.create({
     block: {},
-    // text: {
-    //     padding: 16,
-    //     fontSize: 24,
-    // },
 });
 
 export default CalendarScreen;

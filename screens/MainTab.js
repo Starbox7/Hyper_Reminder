@@ -1,26 +1,28 @@
 import React from "react";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import RemindersScreen from "./RemindersScreen";
-import CalendarScreen from "./CalendarScreen";
-import GithubScreen from "./GithubScreen";
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-// import Icon from 'react-native-vector-icons/FontAwesome';
+
 import AntDesignIcon from 'react-native-vector-icons/AntDesign'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+
+import GithubScreen from "./GithubScreen";
+import CalendarScreen from "./CalendarScreen";
+import ReminderScreen from "./ReminderScreen";
+
 
 
 const Tab = createBottomTabNavigator();
 
 function MainTab() {
+
     return (
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
-                showLabel: false,
-                activeTintColor: '#009688',
             }}>
             <Tab.Screen
                 name="리마인더"
-                component={RemindersScreen}
+                component={ReminderScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialIcon name="check" size={size} color={color} />

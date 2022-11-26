@@ -1,13 +1,18 @@
 import React from "react";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import MainTab from "./MainTab";
-import WriteScreen from "./WriteScreen";
 import MenuScreen from "./MenuScreen";
+import WriteScreen from "./writeScreen/WriteScreen";
 import SearchScreen from "./GithubScreen";
+
+
 
 const Stack = createNativeStackNavigator();
 
 function RootStack() {
+    
     return (
         <Stack.Navigator>
             <Stack.Screen
