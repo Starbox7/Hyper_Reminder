@@ -23,14 +23,13 @@ function ReminderScreen() {
     const [Reminders, setReminders] = useState([]);
     const addReminder = title => {
         setReminders([...Todos,
-          {id: uuid(), titleValue: title, checkde: false}, // check true면 완료
+        { id: uuid(), titleValue: title, checkde: false }, // check true면 완료
         ]);
-      };
+    };
 
     return (
 
-        <View style={{backgroundColor: "#F4F3EF"}}>
-            <FloatingWriteButton />
+        <View style={{ backgroundColor: "#F4F3EF", flex: 1 }}>
             <ScrollView stickyHeaderIndices={[1]}>
                 <View style={{
                     justifyContent: "center",
@@ -39,34 +38,34 @@ function ReminderScreen() {
                     marginTop: 50,
                 }}>
                     <Text style={{ fontSize: 35, fontWeight: "bold" }}>지난 리마인더 2개</Text>
-                    <View style={{flexDirection: "row",}}>
+                    <View style={{ flexDirection: "row", }}>
                         <Pressable>
                             <Text style={{
-                                backgroundColor: "#ddd", 
-                                borderRadius: 15, 
-                                paddingTop: 3, 
+                                backgroundColor: "#ddd",
+                                borderRadius: 15,
+                                paddingTop: 3,
                                 paddingBottom: 3,
                                 paddingLeft: 10,
                                 paddingRight: 10,
-                                fontWeight: "bold", 
+                                fontWeight: "bold",
                                 color: "#545454",
-                                marginLeft:5,
-                                marginRight:5,
-                                }}>나중에</Text>
+                                marginLeft: 5,
+                                marginRight: 5,
+                            }}>나중에</Text>
                         </Pressable>
                         <Pressable>
                             <Text style={{
-                                backgroundColor: "#ddd", 
-                                borderRadius: 15, 
-                                paddingTop: 3, 
+                                backgroundColor: "#ddd",
+                                borderRadius: 15,
+                                paddingTop: 3,
                                 paddingBottom: 3,
                                 paddingLeft: 10,
                                 paddingRight: 10,
-                                fontWeight: "bold", 
+                                fontWeight: "bold",
                                 color: "#545454",
-                                marginLeft:5,
-                                marginRight:5,
-                                }}>보기</Text>
+                                marginLeft: 5,
+                                marginRight: 5,
+                            }}>보기</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -104,21 +103,18 @@ function ReminderScreen() {
                 </View>
 
                 <Text style={styles.ReminderCategories}>미뤄둔 일</Text>
-                <ReminderList />
+                <Reminder/>
 
                 <Text style={styles.ReminderCategories}>오늘</Text>
-                <Reminder />
-                <Reminder />
+
 
                 <Text style={styles.ReminderCategories}>예정</Text>
-                <Reminder />
-                <Reminder />
+
 
                 <Text style={styles.ReminderCategories}>알림 없음</Text>
-                <Reminder />
-                <Reminder />
+                <ReminderList />
             </ScrollView>
-
+            <FloatingWriteButton />
         </View>
     );
 }
@@ -134,7 +130,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: "#F2F2F2",
         borderRadius: 15,
-        paddingTop:15,
+        paddingTop: 15,
     },
     ReminderCategories: {
         marginLeft: 20,

@@ -109,6 +109,12 @@ const styles = StyleSheet.create({
         color: '#A2A2A2',
 
     },
+    headerText3: {
+        fontWeight: "bold",
+        fontSize: 17,
+        color: 'black',
+
+    },
 });
 
 export default styles;

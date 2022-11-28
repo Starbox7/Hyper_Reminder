@@ -5,7 +5,9 @@ import { View, TextInput, Text, Switch, KeyboardAvoidingView, Pressable } from '
 
 import uuid from "react-uuid";
 import IoniconsIcon from 'react-native-vector-icons/Ionicons'
+import FeatherIcon from 'react-native-vector-icons/Feather'
 import FontAwesomIcon from 'react-native-vector-icons/FontAwesome';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import styles from "./style";
@@ -14,6 +16,10 @@ import CheckList from "../../components/CheckList";
 
 
 function WriteScreen() {
+    //토글 영역
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     //네비게이션 영역
     const navigation = useNavigation();
     const onPress = () => {
@@ -34,14 +40,21 @@ function WriteScreen() {
     const { reminderList, addReminder, checkList, addCheckList, newRemiderId, initCheckList } = useStore();
     //저장 버튼을 누르면 리마인더 리스트를 업데이트 한다.
     const addReminderHandler = () => {
-        const newReminder = {
-            id: makeReminderId,
-            title: title,
-            memo: memo,
-            checkList: checkList,
-        };
-        const data = [...reminderList, newReminder];
-        addReminder(data);
+        if (title != "") {
+            const newReminder = {
+                id: makeReminderId,
+                title: title,
+                memo: memo,
+                checkList: checkList,
+            };
+            const data = [...reminderList, newReminder];
+            addReminder(data);
+            initCheckList();
+            onPress();
+        }
+        // console.log(reminderList[0].id)
+    }
+    const addCancelReminderHandler = () => {
         initCheckList();
         onPress();
     }
@@ -49,9 +62,10 @@ function WriteScreen() {
         const newCheck = {
             parentId: makeReminderId,
             id: uuid(),
-            checkMemo: "1234",
+            checkMemo: "",
             do: false,
         };
+        // console.log(newCheck.checkMemo)
         const checkData = [...checkList, newCheck];
         addCheckList(checkData);
     }
@@ -95,13 +109,60 @@ function WriteScreen() {
                         </Pressable>
                     </View>
                 </View>
-                <View style={styles.reminderDeadline}>
-                    <Text style={{ marginLeft: 5, fontSize: 17, }}>마감 날짜</Text>
-                    <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={"#f4f3f4"}
-                        ios_backgroundColor="#3e3e3e"
-                    />
+                <View>
+                    <View style={styles.reminderDeadline}>
+                        <Text style={{ marginLeft: 5, fontSize: 17, }}>마감 날짜</Text>
+                        <Switch
+                            trackColor={{ false: "#767577", true: "#007FFF" }}
+                            thumbColor={"#FFFFFF"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch}
+                            value={isEnabled}
+                        />
+                    </View>
+                    {(isEnabled == true) ?
+                        <View style={{backgroundColor: 'white'}}>
+                            <View style={{ flexDirection: 'row', alignContent: 'center', borderBottomColor: "#ddd", borderBottomWidth: 1 }}>
+                                <FontAwesomIcon name="bell-o" style={{ marginTop: 5 }} color="gray" />
+                                <Pressable>
+                                    <Text>11월 19일 (화)</Text>
+                                </Pressable>
+                                <View style={{ borderColor: "#ddd", borderWidth: 1.5, flexDirection: 'row', borderRadius: 30 }}>
+                                    <Text>21:55</Text>
+                                    <View style={{ backgroundColor: "#ddd", width: 17, height: 17, alignItems: "center", justifyContent: "center", borderRadius: 40 }}>
+                                        <AntDesignIcon name="plus" color={"green"} />
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{ alignContent: 'center', borderBottomColor: "#ddd", borderBottomWidth: 1, alignItems: 'center' }}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text>22</Text>
+                                    <Text>55</Text>
+                                </View>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text>22</Text>
+                                    <Text>:</Text>
+                                    <Text>55</Text>
+                                </View>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text>22</Text>
+                                    <Text>55</Text>
+                                </View>
+                            </View>
+                            <View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <FeatherIcon name="repeat" size={13} style={{ marginRight: 10, marginTop: 4, color: "#7D7D7D" }} />
+                                    <Text>반복 안 함</Text>
+                                </View>
+                                <View style={{flexDirection: 'row'}}>
+                                    <IoniconsIcon name="volume-high-outline" size={19} color="#7D7D7D" />
+                                    <Text>중간</Text>
+                                </View>
+                            </View>
+                        </View> : null}
+                    <View>
+
+                    </View>
                 </View>
                 <View style={styles.reminderTime}>
                     <Text style={{ marginLeft: 5, fontSize: 17, }}>진행 날짜</Text>
@@ -145,7 +206,7 @@ function WriteScreen() {
                         }, { flex: 1, justifyContent: 'center' }
                     ]}
                     android_ripple={{ color: 'white' }}
-                    onPress={onPress}>
+                    onPress={addCancelReminderHandler}>
                     <Text style={styles.headerText1}>취소</Text>
                 </Pressable>
 
@@ -158,9 +219,8 @@ function WriteScreen() {
                     ]}
                     android_ripple={{ color: 'white' }}
                     onPress={addReminderHandler}>
-                    <Text style={styles.headerText2}>저장</Text>
+                    {(title == "") ? <Text style={styles.headerText2}>저장</Text> : <Text style={styles.headerText3}>저장</Text>}
                 </Pressable>
-
             </View>
         </KeyboardAvoidingView>
     );
