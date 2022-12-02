@@ -15,16 +15,6 @@ const styles = StyleSheet.create({
         color: "white",
         marginBottom: 20,
     },
-    reminderDeadline: {
-        backgroundColor: "#ffffff",
-        borderRadius: 21,
-        padding: 10,
-        color: "white",
-        marginBottom: 20,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
     reminderTime: {
         backgroundColor: "#ffffff",
         borderRadius: 21,

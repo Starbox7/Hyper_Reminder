@@ -8,9 +8,9 @@ import FeatherIcon from 'react-native-vector-icons/Feather'
 const CheckListItem = ({ item }) => {
     const { checkList, updateCheckList } = useStore()
 
-    const updateCheckListHandler = (inText) => {
+    const updateAddCheckListHandler = (inText) => {
         const index = checkList.findIndex((checkData) => checkData.id === item.id)
-        console.log(index)
+        // console.log(index)
         const updateCheckListItem = {
             parentId: item.parentId,
             id: item.id,
@@ -18,12 +18,22 @@ const CheckListItem = ({ item }) => {
             do: item.do,
         }
         // console.log(updateCheckListItem)
-        const newCheckListData = [
+        const newAddCheckListData = [
             ...(checkList.slice(0, index)),
             updateCheckListItem,
             ...(checkList.slice(index + 1))];
 
-        updateCheckList(newCheckListData)
+        updateCheckList(newAddCheckListData)
+    }
+
+    const updateDeleteCheckListHandler = () => {
+        const index = checkList.findIndex((checkData) => checkData.id === item.id)
+    
+        const newDeleteCheckListData = [
+            ...(checkList.slice(0, index)),
+            ...(checkList.slice(index + 1))];
+
+        updateCheckList(newDeleteCheckListData)
     }
 
     const [text, setText] = useState(item.checkMemo)
@@ -38,12 +48,16 @@ const CheckListItem = ({ item }) => {
                 textAlignVertical="top"
                 onChangeText={
                     (inText) => {
-                        updateCheckListHandler(inText)
+                        updateAddCheckListHandler(inText)
                         setText(inText)
                         // console.log(text)
                         // console.log(checkList)
                     }
                 }
+                onKeyPress={({ nativeEvent }) => {
+                    if (nativeEvent.key === 'Backspace'&&text=="") {
+                        updateDeleteCheckListHandler()
+                    }}}
                 value={text}
             />
         </View>

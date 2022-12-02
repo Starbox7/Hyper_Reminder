@@ -12,13 +12,12 @@ import MaterialCommunityIconsIcon from 'react-native-vector-icons/MaterialCommun
 
 import styles from "./style";
 import useStore from "../../Zustand/useStore";
+import Deadline from "../../components/Deadline";
 import CheckList from "../../components/CheckList";
 
 
 function WriteScreen() {
-    //토글 영역
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    
 
     //네비게이션 영역
     const navigation = useNavigation();
@@ -109,61 +108,7 @@ function WriteScreen() {
                         </Pressable>
                     </View>
                 </View>
-                <View>
-                    <View style={styles.reminderDeadline}>
-                        <Text style={{ marginLeft: 5, fontSize: 17, }}>마감 날짜</Text>
-                        <Switch
-                            trackColor={{ false: "#767577", true: "#007FFF" }}
-                            thumbColor={"#FFFFFF"}
-                            ios_backgroundColor="#3e3e3e"
-                            onValueChange={toggleSwitch}
-                            value={isEnabled}
-                        />
-                    </View>
-                    {(isEnabled == true) ?
-                        <View style={{backgroundColor: 'white'}}>
-                            <View style={{ flexDirection: 'row', alignContent: 'center', borderBottomColor: "#ddd", borderBottomWidth: 1 }}>
-                                <FontAwesomIcon name="bell-o" style={{ marginTop: 5 }} color="gray" />
-                                <Pressable>
-                                    <Text>11월 19일 (화)</Text>
-                                </Pressable>
-                                <View style={{ borderColor: "#ddd", borderWidth: 1.5, flexDirection: 'row', borderRadius: 30 }}>
-                                    <Text>21:55</Text>
-                                    <View style={{ backgroundColor: "#ddd", width: 17, height: 17, alignItems: "center", justifyContent: "center", borderRadius: 40 }}>
-                                        <AntDesignIcon name="plus" color={"green"} />
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={{ alignContent: 'center', borderBottomColor: "#ddd", borderBottomWidth: 1, alignItems: 'center' }}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text>22</Text>
-                                    <Text>55</Text>
-                                </View>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text>22</Text>
-                                    <Text>:</Text>
-                                    <Text>55</Text>
-                                </View>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text>22</Text>
-                                    <Text>55</Text>
-                                </View>
-                            </View>
-                            <View>
-                                <View style={{flexDirection: 'row'}}>
-                                    <FeatherIcon name="repeat" size={13} style={{ marginRight: 10, marginTop: 4, color: "#7D7D7D" }} />
-                                    <Text>반복 안 함</Text>
-                                </View>
-                                <View style={{flexDirection: 'row'}}>
-                                    <IoniconsIcon name="volume-high-outline" size={19} color="#7D7D7D" />
-                                    <Text>중간</Text>
-                                </View>
-                            </View>
-                        </View> : null}
-                    <View>
-
-                    </View>
-                </View>
+                <Deadline />
                 <View style={styles.reminderTime}>
                     <Text style={{ marginLeft: 5, fontSize: 17, }}>진행 날짜</Text>
                     <Switch

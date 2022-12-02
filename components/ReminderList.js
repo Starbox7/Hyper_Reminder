@@ -13,17 +13,17 @@ const ReminderList = () => {
     return (
         reminderList.map((item, index) => {
             return (
-                <Pressable
-                    key={item.id}
-                    style={({ pressed }) => [
-                        styles.button,
-                        Platform.OS === 'ios' && {
-                            opacity: pressed ? 0.6 : 1,
-                        },
-                    ]}
-                    android_ripple={{ color: 'white' }}
-                    onLongPress={console.log('onLongPress!')}>
-                    <View style={styles.Reminder}>
+                // <Pressable
+                //     key={item.id}
+                //     style={({ pressed }) => [
+                //         styles.button,
+                //         Platform.OS === 'ios' && {
+                //             opacity: pressed ? 0.6 : 1,
+                //         },
+                //     ]}
+                //     android_ripple={{ color: 'white' }}
+                //     onLongPress={console.log('onLongPress!')}>
+                    <View key={item.id} style={styles.Reminder}>
                         <View style={{ width: 40, alignItems: "flex-end", marginTop: 18, }}>
                             <MaterialCommunityIconsIcon name="checkbox-blank-outline" size={21} style={{ color: "red" }} />
                         </View>
@@ -55,7 +55,7 @@ const ReminderList = () => {
                             </View>
                         </View>
                     </View>
-                </Pressable>
+                // </Pressable>
             )
         })
     )
