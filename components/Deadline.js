@@ -17,24 +17,24 @@ const vh = (h) => Math.floor(chartHeight / 100 * h)
 function Deadline() {
     const [selectedDate, setSelectedDate] = useState(new Date().getDate());
 
-    function makeDay(a, b, c, d) {
-        // console.log(d, selectedDate)
-        if(d == selectedDate){
-            return <View style={styles.selectedDayTextView}><Text style={styles.selectedDayText} day={a}>{b}</Text></View>
-        }
-        else if(c==true){
-            return <Text style={styles.dayText} day={a}>{b}</Text>
-        }
-        else if (a == "일") {
-            return <Text style={styles.dayTextRed} day={a}>{b}</Text>
-        }
-        else if (a == "토") {
-            return <Text style={styles.dayTextBlue} day={a}>{b}</Text>
-        }
-        else {
-            return <Text style={styles.dayTextBlack} day={a}>{b}</Text>
-        }
-    }
+    // function makeDay(a, b, c, d) {
+    //     // console.log(d, selectedDate)
+    //     if(d == selectedDate&&selectedMonth==today.month){
+    //         return <View style={styles.selectedDayTextView}><Text style={styles.selectedDayText} day={a}>{b}</Text></View>
+    //     }
+    //     else if(c==true){
+    //         return <Text style={styles.dayText} day={a}>{b}</Text>
+    //     }
+    //     else if (a == "일") {
+    //         return <Text style={styles.dayTextRed} day={a}>{b}</Text>
+    //     }
+    //     else if (a == "토") {
+    //         return <Text style={styles.dayTextBlue} day={a}>{b}</Text>
+    //     }
+    //     else {
+    //         return <Text style={styles.dayTextBlack} day={a}>{b}</Text>
+    //     }
+    // }
 
     let week = ["일", "월", "화", "수", "목", "금", "토"]
 
@@ -67,26 +67,44 @@ function Deadline() {
         }
     }, [selectedMonth])
 
+
+
     const returnDate = useCallback(() => {
+        
         let date = Array() // == []
         for (const nowDay of week) {
             const day = new Date(selectedYear, selectedMonth - 1, 1).getDay()
             if (week[day] === nowDay) {
                 for (let i = 0; i < dataTotalCount; i += 1) {
                     let isFuture = new Date() > new Date(selectedYear, selectedMonth - 1, i + 2) ? true : false
+
+                    const [valueItem, setValueItem] = useState('')
+                    const makeValue = (dayItem, dateItem, isFutureItem) => {
+                        if(dateItem == selectedDate&&selectedMonth==today.month){
+                            setValueItem('select')
+                        }
+                        else if(isFutureItem==true){
+                            setValueItem('future')
+                        }
+                        else if (dayItem == "일") {
+                            setValueItem('sun')
+                        }
+                        else if (dayItem == "토") {
+                            setValueItem('sat')
+                        }
+                        else {
+                            setValueItem('day')
+                        }
+                    }
+                    makeValue(week[(day + i) % 7],i+1,isFuture)
                     date.push(
-                        <Pressable style={styles.day} key={i + 1} disabled={isFuture} >
-                            
-                            {/* <NavButton nav={ScreenName.DiaryWrite}
-								today={{
-									year: selectedYear,
-									month: selectedMonth,
-									date: i + 1,
-									day: week[(day + i) % 7]
-								}}
-								disabled={isFuture}>
-							</NavButton> */}
-                            {makeDay(week[(day + i) % 7], i + 1, isFuture, i+1)}
+                        <Pressable style={styles.day} key={i + 1} disabled={isFuture}>
+                            {(valueItem=='select')?<View style={styles.selectedDayTextView}><Text style={styles.selectedDayText} day={week[(day + i) % 7]}>{i+1}</Text></View>:null}
+                            {(valueItem=='future')?<Text style={styles.dayText} day={week[(day + i) % 7]}>{i+1}</Text>:null}
+                            {(valueItem=='sun')?<Text style={styles.dayTextRed} day={week[(day + i) % 7]}>{i+1}</Text>:null}
+                            {(valueItem=='sat')?<Text style={styles.dayTextBlue} day={week[(day + i) % 7]}>{i+1}</Text>:null}
+                            {(valueItem=='day')?<Text style={styles.dayTextBlack} day={week[(day + i) % 7]}>{i+1}</Text>:null}
+
                         </Pressable>
                     )
                 }

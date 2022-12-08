@@ -53,10 +53,7 @@ function WriteScreen() {
         }
         // console.log(reminderList[0].id)
     }
-    const addCancelReminderHandler = () => {
-        initCheckList();
-        onPress();
-    }
+    
     const addCheckHandler = () => {
         const newCheck = {
             parentId: makeReminderId,
