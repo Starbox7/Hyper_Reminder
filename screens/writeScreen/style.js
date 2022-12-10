@@ -1,6 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 
+const chartHeight = Dimensions.get('window').height;
+const chartWidth = Dimensions.get('window').width;
+const vw = (w) => Math.floor(chartWidth / 100 * w)
+const vh = (h) => Math.floor(chartHeight / 100 * h)
 
 const styles = StyleSheet.create({
     KeyboardAvoidingView: {
@@ -104,6 +108,114 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'black',
 
+    },
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    makeCalendar: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 1
+    },
+    year: {
+        fontSize: 20,
+        color: 'black',
+    },
+    month: {
+        fontSize: 30,
+        color: 'black',
+        marginBottom: vh(5),
+    },
+    dayContainer: {
+        width: vw(91),
+        height: vw(13 * 6),
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        // flex-flow: wrap,
+        flexWrap: 'wrap',
+    },
+    selectedDayTextView: {
+        width: vw(13),
+        height: vw(13),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    selectedDayText: {
+        width: vw(7),
+        height: vw(7),
+        fontSize: 17,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        color: 'white',
+        borderRadius: 40,
+        backgroundColor: '#007FFF'
+    },
+    dayText: {
+        width: vw(13),
+        height: vw(13),
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#ddd',
+        textAlignVertical: 'center',
+    },
+    dayTextBlack: {
+        width: vw(13),
+        height: vw(13),
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'black',
+        textAlignVertical: 'center',
+    },
+    dayTextBlue: {
+        width: vw(13),
+        height: vw(13),
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'blue',
+        textAlignVertical: 'center',
+    },
+    dayTextRed: {
+        width: vw(13),
+        height: vw(13),
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'red',
+        textAlignVertical: 'center',
+    },
+    day: {
+        width: vw(13),
+        height: vw(13),
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    calendar: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#e0e0e0',
+    },
+
+    reminderDeadlineFalse: {
+        backgroundColor: "#ffffff",
+        borderRadius: 21,
+        padding: 10,
+        color: "white",
+        marginBottom: 20,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    reminderDeadlineTrue: {
+        backgroundColor: "#ffffff",
+        borderTopLeftRadius: 21,
+        borderTopRightRadius: 21,
+        padding: 10,
+        color: "white",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     },
 });
 

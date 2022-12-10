@@ -8,7 +8,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather'
 
 
 
-const ReminderList = () => {
+const FutureReminderList = () => {
     const { reminderList, nowSort } = useStore();
     return (
         reminderList.map((item, index) => {
@@ -23,7 +23,15 @@ const ReminderList = () => {
                 //     ]}
                 //     android_ripple={{ color: 'white' }}
                 //     onLongPress={console.log('onLongPress!')}>
-                    ((nowSort==true)?(item.deadLine=='404'):(item.date=='404'))?
+                
+                // new Date(item.deadLine).getFullYear() < new Date().getFullYear() ||
+                // new Date(item.deadLine).getMonth() < new Date().getMonth() ||
+                // new Date(item.deadLine).getDate() < new Date().getDate()
+                
+               ( (nowSort==true)?((new Date(new Date(item.deadLine).getFullYear(), new Date(item.deadLine).getMonth(), new Date(item.deadLine).getDate())>
+                new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()))&&(item.deadLine!=='404')):
+                (new Date(new Date(item.date).getFullYear(), new Date(item.date).getMonth(), new Date(item.date).getDate())>
+                new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()))&&(item.date!=='404')) ?
                     <View key={item.id} style={styles.Reminder}>
                         <View style={{ width: 40, alignItems: "flex-end", marginTop: 18, }}>
                             <MaterialCommunityIconsIcon name="checkbox-blank-outline" size={21} style={{ color: "red" }} />
@@ -55,7 +63,7 @@ const ReminderList = () => {
                                 <Text style={{ color: "#7D7D7D" }}>매주 (월, 화, 수, 목, 금)</Text>
                             </View>
                         </View>
-                    </View>:null
+                    </View> : null
                 // </Pressable>
             )
         })
@@ -78,4 +86,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ReminderList;
+export default FutureReminderList;

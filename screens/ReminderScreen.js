@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useStore from "../Zustand/useStore";
 
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 
 import Reminder from "../components/Reminder";
 import ReminderList from "../components/ReminderList";
+import TodayReminderList from "../components/TodayReminderList";
+import LaterReminderList from "../components/LaterReminderList";
+import FutureReminderList from "../components/FutureReminderList";
 import IoniconsIcon from 'react-native-vector-icons/Ionicons'
 import EvilIconsIcon from 'react-native-vector-icons/EvilIcons'
 import FloatingWriteButton from "../components/FloatingWriteButton";
@@ -12,6 +16,16 @@ import FloatingWriteButton from "../components/FloatingWriteButton";
 
 
 function ReminderScreen() {
+    const { sortReminder, reminderList, nowSort, updateNowSort } = useStore();
+    const sortHandler = () => {
+        updateNowSort()
+        sortReminder()
+    }
+    useEffect(()=>{
+        // console.log(reminderList)
+    }, [reminderList])
+    const nowDateTime = new Date()
+    //nowDateTime = nowDateTime[0]
 
     const navigation = useNavigation();
     const onPress = () => {
@@ -97,19 +111,22 @@ function ReminderScreen() {
                                 onPress={onPress2}>
                                 <EvilIconsIcon name="search" size={30} style={{ marginRight: 15 }} />
                             </Pressable>
+                            {/*onPress={} */}
+                            <Pressable onPress={()=>sortHandler()}>
                             <IoniconsIcon name="ellipsis-vertical" size={20} style={{ marginTop: 2, marginRight: 25 }} />
+                            </Pressable>
                         </View>
                     </View>
                 </View>
 
                 <Text style={styles.ReminderCategories}>미뤄둔 일</Text>
-                <Reminder/>
+                <LaterReminderList />
 
                 <Text style={styles.ReminderCategories}>오늘</Text>
-
+                <TodayReminderList />
 
                 <Text style={styles.ReminderCategories}>예정</Text>
-
+                <FutureReminderList />
 
                 <Text style={styles.ReminderCategories}>알림 없음</Text>
                 <ReminderList />

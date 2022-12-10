@@ -8,7 +8,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather'
 
 
 
-const ReminderList = () => {
+const TodayReminderList = () => {
     const { reminderList, nowSort } = useStore();
     return (
         reminderList.map((item, index) => {
@@ -23,7 +23,12 @@ const ReminderList = () => {
                 //     ]}
                 //     android_ripple={{ color: 'white' }}
                 //     onLongPress={console.log('onLongPress!')}>
-                    ((nowSort==true)?(item.deadLine=='404'):(item.date=='404'))?
+                    ((nowSort==true)?((new Date(item.deadLine).getFullYear()==new Date().getFullYear()&&
+                    new Date(item.deadLine).getMonth()==new Date().getMonth()&&
+                    new Date(item.deadLine).getDate()==new Date().getDate())):
+                    (new Date(item.date).getFullYear()==new Date().getFullYear()&&
+                    new Date(item.date).getMonth()==new Date().getMonth()&&
+                    new Date(item.date).getDate()==new Date().getDate()))?
                     <View key={item.id} style={styles.Reminder}>
                         <View style={{ width: 40, alignItems: "flex-end", marginTop: 18, }}>
                             <MaterialCommunityIconsIcon name="checkbox-blank-outline" size={21} style={{ color: "red" }} />
@@ -78,4 +83,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ReminderList;
+export default TodayReminderList;
